@@ -13,19 +13,25 @@ port = int(input("\n\t\tEnter Port number : "))
 s.bind( (ip,port) )
 
 sip = input("\n\t\tEnter Receiver IP : ")
-# sport = int(input("\n\t\tEnter Receiver Port : "))
 
-print()
-print("********************************************************************")
-print("\t\t\t\t\t\t\t\tChat App")
-print("********************************************************************")
+
+
+os.system("cls")
+print("""\t***********************************************************************
+\t*                                                                     *
+\t*                              Chat App                               *
+\t*                                                                     *
+\t***********************************************************************
+         
+         """)
 
 def send():
 
     while True:
-        msg=input("\n\t\t\t\t\t\t")
-        # msg = input('\n\t\t\t\t\t\t\tYour message :')
-        fmsg=msg.encode()
+        msg=input("\n\t\t\t\t\t\t\t")
+        # msg = input("\n\t\t\t\t\t\t\tYour message :")
+        if msg !=  " " :
+            fmsg=msg.encode()
       
         
         s.sendto(fmsg,(sip,port))
@@ -39,7 +45,8 @@ def recv():
         if msg[0].decode() == "exit":
             os._exit(1)
         
-        print('\nReceived from '+ sip +" : " + msg[0].decode() + "\n\t\t\t\t\t\t" ,end="")
+        print('\nReceived from '+ sip +" : " + msg[0].decode() + "\n\t\t\t\t\t\t\t" ,end="")
+        
         # print("\n\t\t\t\t\t\t")
     
 
