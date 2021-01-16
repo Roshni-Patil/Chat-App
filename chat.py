@@ -24,29 +24,45 @@ print("""\t*********************************************************************
 \t***********************************************************************
          
          """)
+try:
+    if recip != sip:
+        sip = recip
+        def send():
+            while True:
+                msg=input("\n\t\t\t\t\t\t\t")
+                # msg = input("\n\t\t\t\t\t\t\tYour message :")
+                if msg !=  " " :
+                    fmsg=msg.encode()
+            
+                
+                s.sendto(fmsg,(sip,port))
+                if fmsg.decode() == "exit":
+                    os._exit(1)
 
-def send():
+except NameError:
+    def send():
+            while True:
+                msg=input("\n\t\t\t\t\t\t\t")
+                # msg = input("\n\t\t\t\t\t\t\tYour message :")
+                if msg !=  " " :
+                    fmsg=msg.encode()
+            
+                
+                s.sendto(fmsg,(sip,port))
+                if fmsg.decode() == "exit":
+                    os._exit(1)
 
-    while True:
-        msg=input("\n\t\t\t\t\t\t\t")
-        # msg = input("\n\t\t\t\t\t\t\tYour message :")
-        if msg !=  " " :
-            fmsg=msg.encode()
-      
-        
-        s.sendto(fmsg,(sip,port))
-        if fmsg.decode() == "exit":
-            os._exit(1)
-        
+
 def recv():
     while True:
         # os.system('tput setaf 2')
         msg = s.recvfrom(1024)
+        recip=msg[1][0]
         if msg[0].decode() == "exit":
             os._exit(1)
         
-        print('\nReceived from '+ sip +" : " + msg[0].decode() + "\n\t\t\t\t\t\t\t" ,end="")
-        
+        print('\nReceived from '+ recip +" : " + msg[0].decode() + "\n\t\t\t\t\t\t\t" ,end="")
+        # sip = recip
         # print("\n\t\t\t\t\t\t")
     
 
